@@ -1,0 +1,16 @@
+server:
+  port: ${PORT:5001}
+spring:
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+  jackson:
+    serialization:
+      indent_output: true
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+  main:
+    banner-mode: 'off'

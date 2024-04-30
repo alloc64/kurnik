@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  kurnik:
+    container_name: kurnik
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "5001:5001"

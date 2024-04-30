@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kurník</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .door-open-close-times {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<p th:text="${state.message}"></p>
+<div th:if="${state.doors != null && state.doors.size() >= 2}">
+    <div style="width: 300px">
+        <h2>Domovní dveře <span th:text="${state.doors[0].getState()}"></span></h2>
+        <form action="#" method="post" class="door-handle">
+            <button type="submit" th:formaction="'/change-state/0/open'">Otevřít</button>
+            <button type="submit" th:formaction="'/change-state/0/close'">Zavřít</button>
+            <button type="submit" th:formaction="'/change-state/0/stop'">Zastavit</button>
+        </form>
+        <form action="#" method="post" class="door-open-close-times">
+            <label for="enabled0">Zapnuto</label>
+            <input type="checkbox" th:checked="${state.doors[0].isEnabled()}" name="enabled" id="enabled0"/>
+            <br>
+            <label for="openTime0">Čas otevření</label>
+            <input type="time" th:value="${state.doors[0].getOpenTime()}" name="openTime" id="openTime0"/>
+            <br>
+            <label for="closeTime0">Čas zavření</label>
+            <input type="time" th:value="${state.doors[0].getCloseTime()}" name="closeTime" id="closeTime0"/>
+            <button type="submit" th:formaction="'/change-times/0'">Změnit časy</button>
+        </form>
+    </div>
+    <div style="width: 300px">
+        <h2>Venkovní dveře <span th:text="${state.doors[1].getState()}"></span></h2>
+        <form action="#" method="post" class="door-handle">
+            <button type="submit" th:formaction="'/change-state/1/open'">Otevřít</button>
+            <button type="submit" th:formaction="'/change-state/1/close'">Zavřít</button>
+            <button type="submit" th:formaction="'/change-state/1/stop'">Zastavit</button>
+        </form>
+        <form action="#" method="post" class="door-open-close-times">
+            <label for="enabled1">Zapnuto</label>
+            <input type="checkbox" th:checked="${state.doors[1].isEnabled()}" name="enabled" id="enabled1"/>
+            <br>
+            <label for="openTime1">Čas otevření</label>
+            <input type="time" th:value="${state.doors[1].getOpenTime()}" name="openTime" id="openTime1"/>
+            <br>
+            <label for="closeTime1">Čas zavření</label>
+            <input type="time" th:value="${state.doors[1].getCloseTime()}" name="closeTime" id="closeTime1"/>
+            <button type="submit" th:formaction="'/change-times/1'">Změnit časy</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

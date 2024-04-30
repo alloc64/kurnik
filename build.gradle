@@ -1,0 +1,53 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "2.7.4"
+    id "io.spring.dependency-management" version "1.0.14.RELEASE"
+}
+
+ext {
+    lombokVersion = "1.18.24"
+    queryDslVersion = "5.0.0"
+}
+
+apply plugin: "application"
+apply plugin: "idea"
+
+group = "alloc64.com"
+version = "0.0.1"
+sourceCompatibility = "17"
+
+springBoot {
+    buildInfo()
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework:spring-aspects"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+    implementation "mysql:mysql-connector-java"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:3.8.1"
+
+    //implementation "org.springdoc:springdoc-openapi-ui:1.6.4"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+}
